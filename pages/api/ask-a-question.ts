@@ -25,7 +25,7 @@ export default async function handler(
 
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `Answer the following question like a doctor.\n
+        prompt: `Answer the following question like a high school language teacher.\n
                  Topic: ${prompt}\n`,
         max_tokens: 200,
         temperature: 0.8,
