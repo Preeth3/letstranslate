@@ -13,15 +13,16 @@ export default async function handler(
 ) {
 
     const prompt = req.query.prompt;
+    const language = req.query.language;
 
-    if (!prompt){
-        return res.status(400).json({error: "Prompt missing"});
+    if (!prompt || !language){
+        return res.status(400).json({error: "Prompt/Language missing"});
 
     }
 
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `What is the following in Spanish (or in English if it is already in Spanish). Respond only with the word(s) and nothing else: ${prompt}\n`,
+        prompt: `Translate the following to ${language}. Respond only with the word(s) and nothing else: ${prompt}\n`,
         max_tokens: 200,
         temperature: 0.8,
         presence_penalty: 0,
