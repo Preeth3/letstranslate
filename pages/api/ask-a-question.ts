@@ -19,10 +19,6 @@ export default async function handler(
 
     }
 
-    if (prompt.length > 100){
-        return res.status(400).json({error: "Prompt too long"});
-    }
-
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: `Answer the following question like a high school language teacher.\n
