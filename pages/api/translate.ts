@@ -15,18 +15,13 @@ export default async function handler(
     const prompt = req.query.prompt;
 
     if (!prompt){
-        return res.status(400).json({error: "Prompt missingg"});
+        return res.status(400).json({error: "Prompt missing"});
 
     }
 
-    if (prompt.length > 100){
-        return res.status(400).json({error: "Prompt too long"});
-    }
-
-    const {query = "bonjour", language = "English"} = req?.body;
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `translate ${query}?? in ${language}`,
+        prompt: `What is the following in Spanish (or in English if it is already in Spanish). Respond only with the word(s) and nothing else: ${prompt}\n`,
         max_tokens: 200,
         temperature: 0.8,
         presence_penalty: 0,
